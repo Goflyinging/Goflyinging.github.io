@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/工具/git/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/工具/sublime text3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -324,8 +324,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/26/工具/git/" itemprop="url">
-                  git 基本使用
+                <a class="post-title-link" href="/2018/02/26/工具/sublime text3/" itemprop="url">
+                  sublime text3
                 </a>
               
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+                <time title="Updated at: 2018-06-24 19:43:10" itemprop="dateModified" datetime="2018-06-24T19:43:10+08:00">2018-06-24</time>
               
             
           </span>
@@ -421,7 +421,48 @@
       
         
           
-            <h1 id="git-使用教程"><a href="#git-使用教程" class="headerlink" title="git 使用教程"></a>git 使用教程</h1>
+            <h1 id="sublime-text3"><a href="#sublime-text3" class="headerlink" title="sublime text3"></a>sublime text3</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="注册码"><a href="#注册码" class="headerlink" title="注册码"></a>注册码</h3><p>—– BEGIN LICENSE —–<br>TwitterInc<br>200 User License<br>EA7E-890007<br>1D77F72E 390CDD93 4DCBA022 FAF60790<br>61AA12C0 A37081C5 D0316412 4584D136<br>94D7F7D4 95BC8C1C 527DA828 560BB037<br>D1EDDD8C AE7B379F 50C9D69D B35179EF<br>2FE898C4 8E4277A8 555CE714 E1FB0E43<br>D5D52613 C3D12E98 BC49967F 7652EED2<br>9D2D2E61 67610860 6D338B72 5CF95C69<br>E36B85CC 84991F19 7575D828 470A92AB<br>—— END LICENSE ——  </p>
+<h3 id="输入法光标"><a href="#输入法光标" class="headerlink" title="输入法光标"></a>输入法光标</h3><ul>
+<li>下载IMESupport，下载地址如下：<br><a href="https://github.com/chikatoike/IMESupport" target="_blank" rel="noopener">https://github.com/chikatoike/IMESupport</a></li>
+<li>把下载好的ZIP文件解压到SublimeText安装目录下的Packages目录。</li>
+<li>重启SublimeText。</li>
+</ul>
+<blockquote>
+<p>在win10 中需要删除系统自带的输入法</p>
+</blockquote>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><ul>
+<li>Choose Command Palette › Package Control: Install Package.</li>
+<li>Find DA UI and hit Enter.</li>
+<li>Choose Command Palette › UI: Select Theme.</li>
+<li>Find DA.sublime-theme and hit Enter.</li>
+<li>Choose Command Palette › UI: Select Color Scheme.</li>
+<li>Find your favorite one.</li>
+<li>Enjoy!</li>
+</ul>
+<h2 id="markdown设置"><a href="#markdown设置" class="headerlink" title="markdown设置"></a>markdown设置</h2><ul>
+<li>安装 Markdown​Editing<ul>
+<li><a href="https://github.com/SublimeText-Markdown/MarkdownEditing" target="_blank" rel="noopener">https://github.com/SublimeText-Markdown/MarkdownEditing</a></li>
+<li>输入 “mdi + tab” 会自动插入下面的图片标记</li>
+<li>输入 “mdl + tab” 会自动生成下面的链接标记</li>
+</ul>
+</li>
+<li>安装 OmniMarkupPreviewer</li>
+</ul>
+<h2 id="模版配置"><a href="#模版配置" class="headerlink" title="模版配置"></a>模版配置</h2><blockquote>
+<p>插件 SublimeTmpl</p>
+</blockquote>
+<ul>
+<li>新增模版 <ul>
+<li>Preferences-&gt;Browse Packages-&gt;SublimeTmpl-&gt;templates，新建一个模板文件md.tmpl</li>
+<li>在 Default (Windows).sublime-keymap 新增如下</li>
+</ul>
+</li>
+</ul>
+<pre><code>{
+    &quot;keys&quot;: [&quot;ctrl+alt+m&quot;], &quot;command&quot;: &quot;sublime_tmpl&quot;,
+    &quot;args&quot;: {&quot;type&quot;: &quot;md&quot;}, &quot;context&quot;: [{&quot;key&quot;: &quot;sublime_tmpl.md&quot;}]
+}
+</code></pre>
           
         
       
