@@ -108,30 +108,25 @@
 
 
 
-  <meta name="description" content="垃圾收集算法标记-清除法 在标记阶段，首先通过根节点，标记所有从根节点开始的可达对象，因此未被标记的对象就是未被引用的垃圾对象。然后在清除阶段，清除所有未被标记的对象。    缺点 效率问题 在标记和清除阶段的效率都不高 标记清除后会产生大量不连续的内存碎片    复制算法 将原有的内存空间分为两块相同的存储空间，每次只使用一块，在垃圾回收时，将正在使用的内存块中存活对象复制到未使用的那一块内存空">
-<meta name="keywords" content="jvm,java">
+  <meta name="description" content="并发控制　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。 悲观锁和乐观锁　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制">
+<meta name="keywords" content="mysql,锁">
 <meta property="og:type" content="article">
-<meta property="og:title" content="垃圾收集算法">
-<meta property="og:url" content="http://yoursite.com/2018/03/03/Java/JVM/垃圾收集算法/index.html">
+<meta property="og:title" content="乐观锁和悲观锁">
+<meta property="og:url" content="http://yoursite.com/2018/06/24/mysql/乐观锁和悲观锁/index.html">
 <meta property="og:site_name" content="Superlxing&#39;s Notes">
-<meta property="og:description" content="垃圾收集算法标记-清除法 在标记阶段，首先通过根节点，标记所有从根节点开始的可达对象，因此未被标记的对象就是未被引用的垃圾对象。然后在清除阶段，清除所有未被标记的对象。    缺点 效率问题 在标记和清除阶段的效率都不高 标记清除后会产生大量不连续的内存碎片    复制算法 将原有的内存空间分为两块相同的存储空间，每次只使用一块，在垃圾回收时，将正在使用的内存块中存活对象复制到未使用的那一块内存空">
+<meta property="og:description" content="并发控制　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。 悲观锁和乐观锁　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/jvm/20170114203544552.png">
-<meta property="og:image" content="http://yoursite.com/img/jvm/20170114203745073.png">
-<meta property="og:image" content="http://yoursite.com/img/jvm/20170114213850833.png">
-<meta property="og:image" content="http://yoursite.com/img/jvm/20170114212325980.png">
-<meta property="og:updated_time" content="2018-06-24T11:05:30.367Z">
+<meta property="og:updated_time" content="2018-06-25T14:56:50.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="垃圾收集算法">
-<meta name="twitter:description" content="垃圾收集算法标记-清除法 在标记阶段，首先通过根节点，标记所有从根节点开始的可达对象，因此未被标记的对象就是未被引用的垃圾对象。然后在清除阶段，清除所有未被标记的对象。    缺点 效率问题 在标记和清除阶段的效率都不高 标记清除后会产生大量不连续的内存碎片    复制算法 将原有的内存空间分为两块相同的存储空间，每次只使用一块，在垃圾回收时，将正在使用的内存块中存活对象复制到未使用的那一块内存空">
-<meta name="twitter:image" content="http://yoursite.com/img/jvm/20170114203544552.png">
+<meta name="twitter:title" content="乐观锁和悲观锁">
+<meta name="twitter:description" content="并发控制　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。 悲观锁和乐观锁　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/03/Java/JVM/垃圾收集算法/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/24/mysql/乐观锁和悲观锁/"/>
 
 
 
@@ -141,7 +136,7 @@
   };
 </script>
 
-  <title>垃圾收集算法 | Superlxing's Notes</title>
+  <title>乐观锁和悲观锁 | Superlxing's Notes</title>
   
 
 
@@ -314,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/Java/JVM/垃圾收集算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/mysql/乐观锁和悲观锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -331,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">垃圾收集算法
+          <h1 class="post-title" itemprop="name headline">乐观锁和悲观锁
               
             
           </h1>
@@ -356,7 +351,7 @@
                 
               
 
-              <time title="Post created: 2018-03-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-03T00:00:00+08:00">2018-03-03</time>
+              <time title="Post created: 2018-06-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">2018-06-24</time>
             
 
             
@@ -373,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+                <time title="Updated at: 2018-06-25 22:56:50" itemprop="dateModified" datetime="2018-06-25T22:56:50+08:00">2018-06-25</time>
               
             
           </span>
@@ -390,7 +385,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/collection/" itemprop="url" rel="index"><span itemprop="name">collection</span></a></span>
 
                 
                 
@@ -424,54 +419,23 @@
       
 
       
-        <h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除法"><a href="#标记-清除法" class="headerlink" title="标记-清除法"></a>标记-清除法</h2><blockquote>
-<p>在标记阶段，首先通过根节点，标记所有从根节点开始的可达对象，因此未被标记的对象就是未被引用的垃圾对象。然后在清除阶段，清除所有未被标记的对象。</p>
-</blockquote>
-<p><img src="/img/jvm/20170114203544552.png" alt="" title="标记-清除法"></p>
+        <h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。</p>
+<h2 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h2><p>　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。<br>　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制实现。<br>　　悲观锁大多数情况下依赖数据库自身锁机制实现，以保证操作最大程度的独占性。加锁当然伴随着的就是资源的消耗了，比如获得获得锁，释放锁等。</p>
+<h2 id="乐观锁实现"><a href="#乐观锁实现" class="headerlink" title="乐观锁实现"></a>乐观锁实现</h2><p>　　一般是先给表加一个版本号（version）字段。当读取数据时，将version字段的值一同读出。每操作（更新）一次，将那条记录的version加1。当我们提交更新的时候，判断此刻的version值是否与刚刚查询出来的version值相等。如果相等，则说明这段期间，没有其他程序对其进行操作（更新）,则予以更新，将version字段的值加1；否则认为是过期数据，拒绝更新。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update task set value=newValue,version=versionValue+1  where id=1 and version=versionValue;</span><br></pre></td></tr></table></figure>
+<h2 id="悲观锁实现"><a href="#悲观锁实现" class="headerlink" title="悲观锁实现"></a>悲观锁实现</h2><p>　　要使用悲观锁，需要关闭mysql数据库的自动提交属性，因为mysql默认使用autocommit模式，也就是说，当你执行一个更新操作后，mysql会立即将结果进行提交。</p>
 <ul>
-<li>缺点<ul>
-<li>效率问题 在标记和清除阶段的效率都不高</li>
-<li>标记清除后会产生大量不连续的内存碎片</li>
+<li>使用命令设置mysql 为非autocommit模式：set autocommit =0；</li>
+<li>一般使用select … for update对所选择的数据进行加锁处理，例如，select status form t_goods where id in (‘1’,’2’)  for update;这条sql语句会锁定t_goods表中id为1和id为2的记录。</li>
 </ul>
-</li>
-</ul>
-<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><blockquote>
-<p>将原有的内存空间分为两块相同的存储空间，每次只使用一块，在垃圾回收时，将正在使用的内存块中存活对象复制到未使用的那一块内存空间中，之后清除正在使用的内存块中的所有对象，完成垃圾回收。</p>
-</blockquote>
-<p><img src="/img/jvm/20170114203745073.png" alt="" title="复制算法"></p>
+<p>　　使用场景举例：商品t_goods表有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们队某个商品下单是必须确保该商品status为1.假设商品的id为1</p>
 <ul>
-<li>优点<ul>
-<li>可确保回收的内存空间是没有碎片的</li>
+<li>begin/begin work/start transaction；//开始事务</li>
+<li>select status from t_goods where id=1 for update；//查询出商品信息</li>
+<li>insert into t_orders(id,goods_id) value (null,1);//根据商品信息生成订单</li>
+<li>update t_goods set status=2;//修改商品status为2</li>
+<li>commit/commit work;//提交事务</li>
 </ul>
-</li>
-<li>缺点<ul>
-<li>系统内存空间折半，只使用一半空间</li>
-<li>存空间中垃圾对象少的话，复制对象也是很耗时的</li>
-</ul>
-</li>
-</ul>
-<h2 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h2><blockquote>
-<p>通过根节点标记出所有的可达对象后，沿着虚线进行对象的移动，将所有的可达对象移到一端，并保持他们之间的引用关系，最后，清理边界外的空间。</p>
-</blockquote>
-<p><img src="/img/jvm/20170114213850833.png" alt="" title="标记-整理"></p>
-<ul>
-<li>优点<ul>
-<li>避免的碎片的产生</li>
-<li>又不需要两块相同的内存空间</li>
-</ul>
-</li>
-</ul>
-<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><blockquote>
-<p>将内存空间根据对象的特点不同进行划分，选择合适的垃圾回收算法，以提高垃圾回收的效率</p>
-</blockquote>
-<ul>
-<li>新生代  使用复制算法</li>
-<li>老年代  使用标记清除算法或者标记-整理算法</li>
-</ul>
-<p><img src="/img/jvm/20170114212325980.png" alt="" title="分代收集算法"></p>
-<h2 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h2><blockquote>
-<p>分区算法将整个堆空间划分为连续的不同小区间,更好的控制GC产生的停顿时间,每次合理的回收若干个小区间，而不是整个堆空间，从而减少一个GC的停顿时间。</p>
-</blockquote>
 
       
     </div>
@@ -492,9 +456,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/锁/" rel="tag"># 锁</a>
           
         </div>
       
@@ -507,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/01/Java/JVM/对象存活算法/" rel="next" title="判断对象存活算法">
-                <i class="fa fa-chevron-left"></i> 判断对象存活算法
+              <a href="/2018/06/24/Java/collection/list之arrayList/" rel="next" title="list之ArrayList">
+                <i class="fa fa-chevron-left"></i> list之ArrayList
               </a>
             
           </div>
@@ -516,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/14/Java/basics/hashCode/" rel="prev" title="hashCode">
-                hashCode <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -702,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-清除法"><span class="nav-number">1.1.</span> <span class="nav-text">标记-清除法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制算法"><span class="nav-number">1.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">1.3.</span> <span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分代收集算法"><span class="nav-number">1.4.</span> <span class="nav-text">分代收集算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区算法"><span class="nav-number">1.5.</span> <span class="nav-text">分区算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发控制"><span class="nav-number">1.</span> <span class="nav-text">并发控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#悲观锁和乐观锁"><span class="nav-number">2.</span> <span class="nav-text">悲观锁和乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁实现"><span class="nav-number">3.</span> <span class="nav-text">乐观锁实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#悲观锁实现"><span class="nav-number">4.</span> <span class="nav-text">悲观锁实现</span></a></li></ol></div>
             
 
           </div>
