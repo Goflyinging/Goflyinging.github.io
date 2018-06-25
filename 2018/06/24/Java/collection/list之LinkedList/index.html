@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="ArrayListArrayList 是 List 接口的可变数组的实现 实现的接口 继承 AbstractList (实现了 List 接口) Cloneable 可克隆 Serializable 可序列化 RandomAccess 为List提供快速访问功能(RandomAccess 为空接口，只是一个可以快速访问的标识)，比如在Collections 使用 list instanceof R">
+  <meta name="description" content="LinkedListLinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。12345678910private static class Node&amp;lt;E&amp;gt; &amp;#123;    E item;    // 当前节点所包含的值    Node&amp;lt;E&amp;gt; next;   //下一个节点    Node&amp;lt;E&amp;gt; prev;">
 <meta name="keywords" content="collection,list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="list之ArrayList">
-<meta property="og:url" content="http://yoursite.com/2018/06/24/Java/collection/list之ArrayList/index.html">
+<meta property="og:title" content="list之LinkedList">
+<meta property="og:url" content="http://yoursite.com/2018/06/24/Java/collection/list之LinkedList/index.html">
 <meta property="og:site_name" content="Superlxing&#39;s Notes">
-<meta property="og:description" content="ArrayListArrayList 是 List 接口的可变数组的实现 实现的接口 继承 AbstractList (实现了 List 接口) Cloneable 可克隆 Serializable 可序列化 RandomAccess 为List提供快速访问功能(RandomAccess 为空接口，只是一个可以快速访问的标识)，比如在Collections 使用 list instanceof R">
+<meta property="og:description" content="LinkedListLinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。12345678910private static class Node&amp;lt;E&amp;gt; &amp;#123;    E item;    // 当前节点所包含的值    Node&amp;lt;E&amp;gt; next;   //下一个节点    Node&amp;lt;E&amp;gt; prev;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-25T15:57:35.099Z">
+<meta property="og:updated_time" content="2018-06-25T16:31:19.881Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="list之ArrayList">
-<meta name="twitter:description" content="ArrayListArrayList 是 List 接口的可变数组的实现 实现的接口 继承 AbstractList (实现了 List 接口) Cloneable 可克隆 Serializable 可序列化 RandomAccess 为List提供快速访问功能(RandomAccess 为空接口，只是一个可以快速访问的标识)，比如在Collections 使用 list instanceof R">
+<meta name="twitter:title" content="list之LinkedList">
+<meta name="twitter:description" content="LinkedListLinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。12345678910private static class Node&amp;lt;E&amp;gt; &amp;#123;    E item;    // 当前节点所包含的值    Node&amp;lt;E&amp;gt; next;   //下一个节点    Node&amp;lt;E&amp;gt; prev;">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/24/Java/collection/list之ArrayList/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/24/Java/collection/list之LinkedList/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>list之ArrayList | Superlxing's Notes</title>
+  <title>list之LinkedList | Superlxing's Notes</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list之ArrayList/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list之LinkedList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">list之ArrayList
+          <h1 class="post-title" itemprop="name headline">list之LinkedList
               
             
           </h1>
@@ -366,7 +366,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-25 23:57:35" itemprop="dateModified" datetime="2018-06-25T23:57:35+08:00">2018-06-25</time>
+                <time title="Updated at: 2018-06-26 00:31:19" itemprop="dateModified" datetime="2018-06-26T00:31:19+08:00">2018-06-26</time>
               
             
           </span>
@@ -417,41 +417,32 @@
       
 
       
-        <h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList 是 List 接口的可变数组的实现</p>
+        <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>LinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    E item;    <span class="comment">// 当前节点所包含的值</span></span><br><span class="line">    Node&lt;E&gt; next;   <span class="comment">//下一个节点</span></span><br><span class="line">    Node&lt;E&gt; prev;    <span class="comment">//上一个节点</span></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item = element;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="实现的接口"><a href="#实现的接口" class="headerlink" title="实现的接口"></a>实现的接口</h3><ul>
-<li>继承 AbstractList (实现了 List 接口)</li>
+<li>继承 AbstractSequentialList，AbstractSequentialList 实现了get(int index)、set(int index, E element)、add(int index, E element) 和 remove(int index)这些随机访问的函数，那么LinkedList也实现了这些随机访问的接口。</li>
+<li>实现了List接口</li>
+<li>实现了Deque接口，Deque操作提供了offerFirst(E e)、offerLast(E e)、peekFirst()、peekLast()、pollFirst()、pollLast()、push(E e)、pop()、removeFirstOccurrence(Object o)、removeLastOccurrence(Object o)这些方法。</li>
 <li>Cloneable 可克隆</li>
 <li>Serializable 可序列化</li>
-<li>RandomAccess 为List提供快速访问功能(RandomAccess 为空接口，只是一个可以快速访问的标识)，比如在Collections 使用 list instanceof RandomAccess，所以该接口只是一个标识</li>
 </ul>
 <h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
-<li><p>不带参数的构造方法 创建一个空数据即默认大小为0，当调用add*方法时会对其进行初始化，add方法默认创建大小为10的数据</p>
+<li>LinkedList(Collection&lt;? extends E&gt; c)</li>
+<li>LinkedList()</li>
+</ul>
+<h3 id="查-增-改-删方法"><a href="#查-增-改-删方法" class="headerlink" title="查 增 改 删方法"></a>查 增 改 删方法</h3><ul>
+<li><p>getFirst()、getLast()、listIterator、get(int index)、peek()查看第一个元素、element()查看第一个元素，若为null将抛出异常、poll()弹出第一个元素，并将其从链表中删除。peekFirst()、peekLast()、pollFirst() 、pollLast()同理.</p>
 </li>
-<li><p>创建指定长度数组，小于 0 抛出异常，等于0 会创建一个空数组，即EMPTY_ELEMENTDATA</p>
+<li><p>add(E e)、addLast(E e)、addFirst(E e)、add(int index, E element)、push(E e)</p>
 </li>
-<li><p>根据集合创建数组，创建长度为集合长度的数组并拷贝</p>
+<li><p>set(int index, E element)</p>
+</li>
+<li><p>remove(Object o)、remove(int index)、pop()、clear()</p>
 </li>
 </ul>
-<h3 id="增删查方法"><a href="#增删查方法" class="headerlink" title="增删查方法"></a>增删查方法</h3><ul>
-<li><p>get(int index) 获取指定位置的集合对象</p>
-</li>
-<li><p>iterator 调用迭代器遍历list集合</p>
-</li>
-<li><p>set 方法，指定位置赋值，检查 index ，如果不合法则抛出异常</p>
-</li>
-<li><p>add 方法，末尾位置添加，如果超出，扩容1.5倍；</p>
-</li>
-<li><p>add(int index,Object obj) 指定位置添加，检查 index ，如不合法则抛出异常。指定位置插入时，会将原来的数组以 index 为界，将 index 后的数据后移一位，后移的实现通过 System.arraycopy 方法实现。再在 index 位置插入需要插入的数据。 System.arraycopy 为 Native 层的方法，可以高效复制数组元素。</p>
-</li>
-<li><p>remove(int index) 根据索引删除，直接操作数组，返回值为被移除的对象。将该对象所在位置之后的数组内容复制到从该位置开始，将末尾置为 null</p>
-</li>
-<li><p>remove(Object obj) 根据对象删除，遍历数组，如果存在，将该对象所在位置之后的数组内容复制到从该位置开始，将末尾置为 null</p>
-<h3 id="Fail-Fast机制"><a href="#Fail-Fast机制" class="headerlink" title="Fail-Fast机制"></a>Fail-Fast机制</h3><p>　　ArrayList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3></li>
-<li>底层使用数组实现，顺序存储。</li>
-<li>当我们可预知要保存的元素的多少时，要在构造 ArrayList 实例时，就指定其容量，以避免数组扩容的发生。或者根据实际需求，通过调用ensureCapacity 方法来手动增加 ArrayList 实例的容量。</li>
-<li>ArrayList基于数组实现，可以通过下标索引直接查找到指定位置的元素，因此查找效率高，但每次插入或删除元素，就要大量地移动元素，插入删除元素的效率低。</li>
-<li>ArrayList中允许元素为null，在remove(Object o)，将o分为null和不为null两种情况处理。</li>
+<h3 id="Fail-Fast机制"><a href="#Fail-Fast机制" class="headerlink" title="Fail-Fast机制"></a>Fail-Fast机制</h3><p>　　LinkedList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>LinkedList是List接口的双向链表非同步实现，并允许包括null在内的所有元素。</li>
+<li>LinkedList可用于实现栈和队列</li>
 </ul>
 
       
@@ -488,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/24/Java/collection/list之LinkedList/" rel="next" title="list之LinkedList">
-                <i class="fa fa-chevron-left"></i> list之LinkedList
+              <a href="/2018/05/16/Java/JVM/MAT/" rel="next" title="memory analyzer tool">
+                <i class="fa fa-chevron-left"></i> memory analyzer tool
               </a>
             
           </div>
@@ -498,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/24/Java/collection/list/" rel="prev" title="list">
-                list <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/24/Java/collection/list之ArrayList/" rel="prev" title="list之ArrayList">
+                list之ArrayList <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -685,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现的接口"><span class="nav-number">1.1.</span> <span class="nav-text">实现的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增删查方法"><span class="nav-number">1.3.</span> <span class="nav-text">增删查方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fail-Fast机制"><span class="nav-number">1.4.</span> <span class="nav-text">Fail-Fast机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.</span> <span class="nav-text">LinkedList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现的接口"><span class="nav-number">1.1.</span> <span class="nav-text">实现的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查-增-改-删方法"><span class="nav-number">1.3.</span> <span class="nav-text">查 增 改 删方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fail-Fast机制"><span class="nav-number">1.4.</span> <span class="nav-text">Fail-Fast机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
