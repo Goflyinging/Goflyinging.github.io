@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/mysql/乐观锁和悲观锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/Java/collection/list之Vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -324,8 +324,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/24/mysql/乐观锁和悲观锁/" itemprop="url">
-                  乐观锁和悲观锁
+                <a class="post-title-link" href="/2018/07/02/Java/collection/list之Vector/" itemprop="url">
+                  list之Vector
                 </a>
               
             
@@ -349,24 +349,12 @@
 	      
                 <span class="post-meta-item-text">Created at</span>
               
-              <time title="Post created: 2018-06-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">2018-06-24</time>
+              <time title="Post created: 2018-07-02 00:00:00 / Updated at: 23:47:09" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+08:00">2018-07-02</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-06-25 23:03:27" itemprop="dateModified" datetime="2018-06-25T23:03:27+08:00">2018-06-25</time>
               
             
           </span>
@@ -383,7 +371,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/collection/" itemprop="url" rel="index"><span itemprop="name">collection</span></a></span>
 
                 
                 
@@ -419,22 +407,37 @@
       
         
           
-            <h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。</p>
-<h2 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h2><p>　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。<br>　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制实现。<br>　　悲观锁大多数情况下依赖数据库自身锁机制实现，以保证操作最大程度的独占性。加锁当然伴随着的就是资源的消耗了，比如获得获得锁，释放锁等。</p>
-<h2 id="乐观锁实现"><a href="#乐观锁实现" class="headerlink" title="乐观锁实现"></a>乐观锁实现</h2><p>　　一般是先给表加一个版本号（version）字段。当读取数据时，将version字段的值一同读出。每操作（更新）一次，将那条记录的version加1。当我们提交更新的时候，判断此刻的version值是否与刚刚查询出来的version值相等。如果相等，则说明这段期间，没有其他程序对其进行操作（更新）,则予以更新，将version字段的值加1；否则认为是过期数据，拒绝更新。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update task set value=newValue,version=versionValue+1  where id=1 and version=versionValue;</span><br></pre></td></tr></table></figure>
-<h2 id="悲观锁实现"><a href="#悲观锁实现" class="headerlink" title="悲观锁实现"></a>悲观锁实现</h2><p>　　要使用悲观锁，需要关闭mysql数据库的自动提交属性，因为mysql默认使用autocommit模式，也就是说，当你执行一个更新操作后，mysql会立即将结果进行提交。</p>
+            <h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
+<p>　　Vector是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List, RandomAccess, Cloneable这些接口。</p>
 <ul>
-<li>使用命令设置mysql 为非autocommit模式：set autocommit =0；</li>
-<li>一般使用select … for update对所选择的数据进行加锁处理，例如，select status form t_goods where id in (‘1’,’2’)  for update;这条sql语句会锁定t_goods表中id为1和id为2的记录。</li>
+<li>Vector 继承了AbstractList，实现了List；所以，它是一个队列，支持相关的添加、删除、修改、遍历等功能。</li>
+<li>Vector 实现了RandmoAccess接口，即提供了随机访问功能。RandmoAccess是java中用来被List实现，为List提供快速访问功能的。在Vector中，我们即可以通过元素的序号快速获取元素对象；这就是快速随机访问。</li>
+<li>Vector 实现了Cloneable接口，即实现clone()函数。它能被克隆。  </li>
 </ul>
-<p>　　使用场景举例：商品t_goods表有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们队某个商品下单是必须确保该商品status为1.假设商品的id为1</p>
-<ul>
-<li>begin/begin work/start transaction；//开始事务</li>
-<li>select status from t_goods where id=1 for update；//查询出商品信息</li>
-<li>insert into t_orders(id,goods_id) value (null,1);//根据商品信息生成订单</li>
-<li>update t_goods set status=2;//修改商品status为2</li>
-<li>commit/commit work;//提交事务</li>
+<p>　　和ArrayList不同，Vector中的操作是线程安全的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure></p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">synchronized boolean        add(E object)</span><br><span class="line">             void           add(int location, E object)</span><br><span class="line">synchronized boolean        addAll(Collection&lt;? extends E&gt; collection)</span><br><span class="line">synchronized boolean        addAll(int location, Collection&lt;? extends E&gt; collection)</span><br><span class="line">synchronized void           addElement(E object)</span><br><span class="line">synchronized int            capacity()</span><br><span class="line">             void           clear()</span><br><span class="line">synchronized Object         clone()</span><br><span class="line">             boolean        contains(Object object)</span><br><span class="line">synchronized boolean        containsAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized void           copyInto(Object[] elements)</span><br><span class="line">synchronized E              elementAt(int location)</span><br><span class="line">             Enumeration&lt;E&gt; elements()</span><br><span class="line">synchronized void           ensureCapacity(int minimumCapacity)</span><br><span class="line">synchronized boolean        equals(Object object)</span><br><span class="line">synchronized E              firstElement()</span><br><span class="line">             E              get(int location)</span><br><span class="line">synchronized int            hashCode()</span><br><span class="line">synchronized int            indexOf(Object object, int location)</span><br><span class="line">             int            indexOf(Object object)</span><br><span class="line">synchronized void           insertElementAt(E object, int location)</span><br><span class="line">synchronized boolean        isEmpty()</span><br><span class="line">synchronized E              lastElement()</span><br><span class="line">synchronized int            lastIndexOf(Object object, int location)</span><br><span class="line">synchronized int            lastIndexOf(Object object)</span><br><span class="line">synchronized E              remove(int location)</span><br><span class="line">             boolean        remove(Object object)</span><br><span class="line">synchronized boolean        removeAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized void           removeAllElements()</span><br><span class="line">synchronized boolean        removeElement(Object object)</span><br><span class="line">synchronized void           removeElementAt(int location)</span><br><span class="line">synchronized boolean        retainAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized E              set(int location, E object)</span><br><span class="line">synchronized void           setElementAt(E object, int location)</span><br><span class="line">synchronized void           setSize(int length)</span><br><span class="line">synchronized int            size()</span><br><span class="line">synchronized List&lt;E&gt;        subList(int start, int end)</span><br><span class="line">synchronized &lt;T&gt; T[]        toArray(T[] contents)</span><br><span class="line">synchronized Object[]       toArray()</span><br><span class="line">synchronized String         toString()</span><br><span class="line">synchronized void           trimToSize()</span><br></pre></td></tr></table></figure>
+<h3 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h3><ul>
+<li><p>通过迭代器遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> for(Iterator iter = list.iterator(); iter.hasNext(); ) &#123;</span><br><span class="line">    iter.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>随机访问，通过索引值去遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">int size = vec.size();</span><br><span class="line">for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">    value = (Integer)vec.get(i);        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>foreach循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">for (Integer integ:vec) &#123;</span><br><span class="line">    value = integ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enumeration遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">Enumeration enu = vec.elements();</span><br><span class="line">while (enu.hasMoreElements()) &#123;</span><br><span class="line">    value = (Integer)enu.nextElement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>elementData 是”Object[]类型的数组”，它保存了添加到Vector中的元素。elementData是个动态数组，如果初始化Vector时，没指定动态数组的大小，则使用默认大小10。随着Vector中元素的增加，Vector的容量也会动态增长，capacityIncrement是与容量增长相关的增长系数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?capacityIncrement : oldCapacity)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>elementCount 是动态数组的实际大小。</p>
+</li>
+<li><p>capacityIncrement 是动态数组的增长系数。</p>
+</li>
 </ul>
 
           
@@ -606,6 +609,200 @@
             <h2 id="List概述"><a href="#List概述" class="headerlink" title="List概述"></a>List概述</h2><p><img src="/img/collection/List.PNG" alt="" title="javaList集合"></p>
 <ul>
 <li>List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list之LinkedList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="superlxing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Superlxing's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/Java/collection/list之LinkedList/" itemprop="url">
+                  list之LinkedList
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                
+              
+	      
+                <span class="post-meta-item-text">Created at</span>
+              
+              <time title="Post created: 2018-06-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">2018-06-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-06-26 00:31:19" itemprop="dateModified" datetime="2018-06-26T00:31:19+08:00">2018-06-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/collection/" itemprop="url" rel="index"><span itemprop="name">collection</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>LinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    E item;    <span class="comment">// 当前节点所包含的值</span></span><br><span class="line">    Node&lt;E&gt; next;   <span class="comment">//下一个节点</span></span><br><span class="line">    Node&lt;E&gt; prev;    <span class="comment">//上一个节点</span></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item = element;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现的接口"><a href="#实现的接口" class="headerlink" title="实现的接口"></a>实现的接口</h3><ul>
+<li>继承 AbstractSequentialList，AbstractSequentialList 实现了get(int index)、set(int index, E element)、add(int index, E element) 和 remove(int index)这些随机访问的函数，那么LinkedList也实现了这些随机访问的接口。</li>
+<li>实现了List接口</li>
+<li>实现了Deque接口，Deque操作提供了offerFirst(E e)、offerLast(E e)、peekFirst()、peekLast()、pollFirst()、pollLast()、push(E e)、pop()、removeFirstOccurrence(Object o)、removeLastOccurrence(Object o)这些方法。</li>
+<li>Cloneable 可克隆</li>
+<li>Serializable 可序列化</li>
+</ul>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
+<li>LinkedList(Collection&lt;? extends E&gt; c)</li>
+<li>LinkedList()</li>
+</ul>
+<h3 id="查-增-改-删方法"><a href="#查-增-改-删方法" class="headerlink" title="查 增 改 删方法"></a>查 增 改 删方法</h3><ul>
+<li><p>getFirst()、getLast()、listIterator、get(int index)、peek()查看第一个元素、element()查看第一个元素，若为null将抛出异常、poll()弹出第一个元素，并将其从链表中删除。peekFirst()、peekLast()、pollFirst() 、pollLast()同理.</p>
+</li>
+<li><p>add(E e)、addLast(E e)、addFirst(E e)、add(int index, E element)、push(E e)</p>
+</li>
+<li><p>set(int index, E element)</p>
+</li>
+<li><p>remove(Object o)、remove(int index)、pop()、clear()</p>
+</li>
+</ul>
+<h3 id="Fail-Fast机制"><a href="#Fail-Fast机制" class="headerlink" title="Fail-Fast机制"></a>Fail-Fast机制</h3><p>　　LinkedList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>LinkedList是List接口的双向链表非同步实现，并允许包括null在内的所有元素。</li>
+<li>LinkedList可用于实现栈和队列</li>
 </ul>
 
           
@@ -863,7 +1060,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list之LinkedList/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/mysql/乐观锁和悲观锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -882,8 +1079,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/24/Java/collection/list之LinkedList/" itemprop="url">
-                  list之LinkedList
+                <a class="post-title-link" href="/2018/06/24/mysql/乐观锁和悲观锁/" itemprop="url">
+                  乐观锁和悲观锁
                 </a>
               
             
@@ -924,7 +1121,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-26 00:31:19" itemprop="dateModified" datetime="2018-06-26T00:31:19+08:00">2018-06-26</time>
+                <time title="Updated at: 2018-06-25 23:03:27" itemprop="dateModified" datetime="2018-06-25T23:03:27+08:00">2018-06-25</time>
               
             
           </span>
@@ -941,7 +1138,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/collection/" itemprop="url" rel="index"><span itemprop="name">collection</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
 
                 
                 
@@ -977,32 +1174,22 @@
       
         
           
-            <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>LinkedList是List和Deque接口的双向链表的实现。实现了所有可选列表操作，并允许包括null值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    E item;    <span class="comment">// 当前节点所包含的值</span></span><br><span class="line">    Node&lt;E&gt; next;   <span class="comment">//下一个节点</span></span><br><span class="line">    Node&lt;E&gt; prev;    <span class="comment">//上一个节点</span></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item = element;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="实现的接口"><a href="#实现的接口" class="headerlink" title="实现的接口"></a>实现的接口</h3><ul>
-<li>继承 AbstractSequentialList，AbstractSequentialList 实现了get(int index)、set(int index, E element)、add(int index, E element) 和 remove(int index)这些随机访问的函数，那么LinkedList也实现了这些随机访问的接口。</li>
-<li>实现了List接口</li>
-<li>实现了Deque接口，Deque操作提供了offerFirst(E e)、offerLast(E e)、peekFirst()、peekLast()、pollFirst()、pollLast()、push(E e)、pop()、removeFirstOccurrence(Object o)、removeLastOccurrence(Object o)这些方法。</li>
-<li>Cloneable 可克隆</li>
-<li>Serializable 可序列化</li>
+            <h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>　　同一时刻可能会有多个用户更新同一张表的同一条记录。这就会产生冲突，这就是并发性问题。数据库的并发操作通常会导致、丢失更新、读脏数据、不可重复读等问题。</p>
+<h2 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h2><p>　　乐观锁就是非常乐观，它认为所有的操作都不会产生并发冲突。与之相对应的就是悲观锁，它比较悲观，认为所有的操作都会产生并发冲突。<br>　　乐观锁呢，其实并没有锁，只是这么一种叫法而已。大多是基于数据版本（Version）记录机制实现。<br>　　悲观锁大多数情况下依赖数据库自身锁机制实现，以保证操作最大程度的独占性。加锁当然伴随着的就是资源的消耗了，比如获得获得锁，释放锁等。</p>
+<h2 id="乐观锁实现"><a href="#乐观锁实现" class="headerlink" title="乐观锁实现"></a>乐观锁实现</h2><p>　　一般是先给表加一个版本号（version）字段。当读取数据时，将version字段的值一同读出。每操作（更新）一次，将那条记录的version加1。当我们提交更新的时候，判断此刻的version值是否与刚刚查询出来的version值相等。如果相等，则说明这段期间，没有其他程序对其进行操作（更新）,则予以更新，将version字段的值加1；否则认为是过期数据，拒绝更新。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update task set value=newValue,version=versionValue+1  where id=1 and version=versionValue;</span><br></pre></td></tr></table></figure>
+<h2 id="悲观锁实现"><a href="#悲观锁实现" class="headerlink" title="悲观锁实现"></a>悲观锁实现</h2><p>　　要使用悲观锁，需要关闭mysql数据库的自动提交属性，因为mysql默认使用autocommit模式，也就是说，当你执行一个更新操作后，mysql会立即将结果进行提交。</p>
+<ul>
+<li>使用命令设置mysql 为非autocommit模式：set autocommit =0；</li>
+<li>一般使用select … for update对所选择的数据进行加锁处理，例如，select status form t_goods where id in (‘1’,’2’)  for update;这条sql语句会锁定t_goods表中id为1和id为2的记录。</li>
 </ul>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
-<li>LinkedList(Collection&lt;? extends E&gt; c)</li>
-<li>LinkedList()</li>
-</ul>
-<h3 id="查-增-改-删方法"><a href="#查-增-改-删方法" class="headerlink" title="查 增 改 删方法"></a>查 增 改 删方法</h3><ul>
-<li><p>getFirst()、getLast()、listIterator、get(int index)、peek()查看第一个元素、element()查看第一个元素，若为null将抛出异常、poll()弹出第一个元素，并将其从链表中删除。peekFirst()、peekLast()、pollFirst() 、pollLast()同理.</p>
-</li>
-<li><p>add(E e)、addLast(E e)、addFirst(E e)、add(int index, E element)、push(E e)</p>
-</li>
-<li><p>set(int index, E element)</p>
-</li>
-<li><p>remove(Object o)、remove(int index)、pop()、clear()</p>
-</li>
-</ul>
-<h3 id="Fail-Fast机制"><a href="#Fail-Fast机制" class="headerlink" title="Fail-Fast机制"></a>Fail-Fast机制</h3><p>　　LinkedList也采用了快速失败的机制，通过记录modCount参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>LinkedList是List接口的双向链表非同步实现，并允许包括null在内的所有元素。</li>
-<li>LinkedList可用于实现栈和队列</li>
+<p>　　使用场景举例：商品t_goods表有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们队某个商品下单是必须确保该商品status为1.假设商品的id为1</p>
+<ul>
+<li>begin/begin work/start transaction；//开始事务</li>
+<li>select status from t_goods where id=1 for update；//查询出商品信息</li>
+<li>insert into t_orders(id,goods_id) value (null,1);//根据商品信息生成订单</li>
+<li>update t_goods set status=2;//修改商品status为2</li>
+<li>commit/commit work;//提交事务</li>
 </ul>
 
           
@@ -1248,6 +1435,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/设计模式/观察者模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="superlxing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Superlxing's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/14/设计模式/观察者模式/" itemprop="url">
+                  观察者模式(observer)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                
+              
+	      
+                <span class="post-meta-item-text">Created at</span>
+              
+              <time title="Post created: 2018-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-14T00:00:00+08:00">2018-03-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h3 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h3><blockquote>
+<p>观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新</p>
+</blockquote>
+<p><img src="/img/design/927750-20161109193416358-1335986795.png" alt="" title="观察者模式"></p>
+<h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><ul>
+<li><p>主题（Subject）：主题是一个接口，该接口规定了具体主题需要实现的方法，比如，添加、删除观察者以及通知观察者更新数据的方法。</p>
+</li>
+<li><p>观察者（Observer）：观察者是一个接口，该接口规定了具体观察者用来更新数据的方法。</p>
+</li>
+<li><p>具体主题（ConcreteSubject）：具体主题是实现主题接口类的一个实例，该实例包含有可以经常发生变化的数据。具体主题需使用一个集合，比如ArrayList，存放观察者的引用，以便数据变化时通知具体观察者。</p>
+</li>
+<li><p>具体观察者（ConcreteObserver）：具体观察者是实现观察者接口类的一个实例。观察者必须被具体主题注册。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/Java/basics/hashCode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1380,187 +1748,6 @@
 </li>
 <li>返回result。</li>
 <li>写完了 hashCode 方法之后，问问自己“相等的实例是否都具有相等的散列码”。要编写单<br>元测试来验证你的推断。如果相等实例有着不相等的散列码，则要找出原因，并修正错<br>误。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/设计模式/观察者模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="superlxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Superlxing's Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/14/设计模式/观察者模式/" itemprop="url">
-                  观察者模式(observer)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                
-              
-	      
-                <span class="post-meta-item-text">Created at</span>
-              
-              <time title="Post created: 2018-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-14T00:00:00+08:00">2018-03-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h3 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h3><blockquote>
-<p>观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新</p>
-</blockquote>
-<p><img src="/img/design/927750-20161109193416358-1335986795.png" alt="" title="观察者模式"></p>
-<h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><ul>
-<li><p>主题（Subject）：主题是一个接口，该接口规定了具体主题需要实现的方法，比如，添加、删除观察者以及通知观察者更新数据的方法。</p>
-</li>
-<li><p>观察者（Observer）：观察者是一个接口，该接口规定了具体观察者用来更新数据的方法。</p>
-</li>
-<li><p>具体主题（ConcreteSubject）：具体主题是实现主题接口类的一个实例，该实例包含有可以经常发生变化的数据。具体主题需使用一个集合，比如ArrayList，存放观察者的引用，以便数据变化时通知具体观察者。</p>
-</li>
-<li><p>具体观察者（ConcreteObserver）：具体观察者是实现观察者接口类的一个实例。观察者必须被具体主题注册。</p>
-</li>
 </ul>
 
           
@@ -1830,7 +2017,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/Java/JVM/对象存活算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/Java/JVM/内存模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -1849,8 +2036,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/01/Java/JVM/对象存活算法/" itemprop="url">
-                  判断对象存活算法
+                <a class="post-title-link" href="/2018/03/01/Java/JVM/内存模型/" itemprop="url">
+                  jav运行时数据区
                 </a>
               
             
@@ -1891,7 +2078,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+                <time title="Updated at: 2018-07-08 20:49:15" itemprop="dateModified" datetime="2018-07-08T20:49:15+08:00">2018-07-08</time>
               
             
           </span>
@@ -1944,219 +2131,7 @@
       
         
           
-            <h1 id="判断对象存活算法"><a href="#判断对象存活算法" class="headerlink" title="判断对象存活算法"></a>判断对象存活算法</h1><h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><blockquote>
-<p>给对象添加一个引用计数器，每当一个地方引用它时，引用计数器加1；引用失效时计数器减1；计数器为0表示对象不在被使用。</p>
-</blockquote>
-<p><img src="/img/jvm/b9e5ecd5d1cfb1d045541c1f6e25e92c_hd.jpg" alt="" title="引用计数法"></p>
-<ul>
-<li>缺点<ul>
-<li>很难解决对象之间相互引用的方式</li>
-</ul>
-</li>
-</ul>
-<h2 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h2><blockquote>
-<p>从GC Roots对象作为起始点，利用数学中图论知识，图中可达对象便是存活对象，而不可达对象则是需要回收的垃圾内存。</p>
-</blockquote>
-<p><img src="/img/jvm/22f72b18415405c3e0207925a8de74fa_hd.jpg" alt="" title="可达性分析算法"></p>
-<ul>
-<li>GC ROOTS 对象<ul>
-<li>虚拟机栈（栈帧的局部变量表）中所引用的对象；</li>
-<li>本地方法栈的JNI所引用的对象；</li>
-<li>方法区的类静态属性（static）和常量（static final）所引用的对象；</li>
-</ul>
-</li>
-</ul>
-<h1 id="生存？死亡"><a href="#生存？死亡" class="headerlink" title="生存？死亡"></a>生存？死亡</h1><blockquote>
-<p>至少经过俩次可达性算法标记</p>
-</blockquote>
-<ul>
-<li>第一次标记  根据是否有必要执行finalize()方法 在对象存活期只会调用一次<ul>
-<li>没有必要执行：未覆盖finalize()方法或者已经调用</li>
-<li>有必要执行：将对象放入F-Quere队列中，虚拟机触发低优先级的finalize线程去执行，可由该方法再次拯救自己</li>
-</ul>
-</li>
-<li>第二次标记  F-Quere队列中对象进行第二次标记，若自救成功，在“即将回收”的集合中移除该对象</li>
-</ul>
-<h1 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h1><blockquote>
-<p>废弃常量和无用类</p>
-</blockquote>
-<ul>
-<li>常量  没有其它地方引用这个字面量</li>
-<li>类<ul>
-<li>该类所有的实例都已经被回收，即Java堆中不存在该类的任何实例；</li>
-<li>加载该类的ClassLoader已经被回收；</li>
-<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/Java/jmm/内存模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="superlxing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Superlxing's Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/01/Java/jmm/内存模型/" itemprop="url">
-                  jvm内存模型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                
-              
-	      
-                <span class="post-meta-item-text">Created at</span>
-              
-              <time title="Post created: 2018-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-01T00:00:00+08:00">2018-03-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-06-25 23:04:21" itemprop="dateModified" datetime="2018-06-25T23:04:21+08:00">2018-06-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/jmm/" itemprop="url" rel="index"><span itemprop="name">jmm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p><img src="/img/jmm/20150720152805765.png" alt="" title="java内存模型"></p>
+            <h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p><img src="/img/jvm/20150720152805765.png" alt="" title="java内存模型"></p>
 <ul>
 <li>栈区<ul>
 <li>线程私有，使用一段连续的内存空间</li>
@@ -2270,7 +2245,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2295,9 +2270,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -2334,9 +2307,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

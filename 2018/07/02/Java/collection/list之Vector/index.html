@@ -108,27 +108,25 @@
 
 
 
-  <meta name="description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
+  <meta name="description" content="Vector123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable 　　Vector是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List,">
 <meta name="keywords" content="collection,list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="list">
-<meta property="og:url" content="http://yoursite.com/2018/06/24/Java/collection/list/index.html">
+<meta property="og:title" content="list之Vector">
+<meta property="og:url" content="http://yoursite.com/2018/07/02/Java/collection/list之Vector/index.html">
 <meta property="og:site_name" content="Superlxing&#39;s Notes">
-<meta property="og:description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
+<meta property="og:description" content="Vector123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable 　　Vector是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/collection/List.PNG">
-<meta property="og:updated_time" content="2018-06-24T16:20:44.415Z">
+<meta property="og:updated_time" content="2018-07-02T15:47:09.641Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="list">
-<meta name="twitter:description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
-<meta name="twitter:image" content="http://yoursite.com/img/collection/List.PNG">
+<meta name="twitter:title" content="list之Vector">
+<meta name="twitter:description" content="Vector123public class Vector&amp;lt;E&amp;gt;    extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable 　　Vector是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List,">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/24/Java/collection/list/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/02/Java/collection/list之Vector/"/>
 
 
 
@@ -138,7 +136,7 @@
   };
 </script>
 
-  <title>list | Superlxing's Notes</title>
+  <title>list之Vector | Superlxing's Notes</title>
   
 
 
@@ -311,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/Java/collection/list之Vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -328,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">list
+          <h1 class="post-title" itemprop="name headline">list之Vector
               
             
           </h1>
@@ -351,24 +349,12 @@
 	      
                 <span class="post-meta-item-text">Created at</span>
               
-              <time title="Post created: 2018-06-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">2018-06-24</time>
+              <time title="Post created: 2018-07-02 00:00:00 / Updated at: 23:47:09" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+08:00">2018-07-02</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-06-25 00:20:44" itemprop="dateModified" datetime="2018-06-25T00:20:44+08:00">2018-06-25</time>
               
             
           </span>
@@ -419,9 +405,37 @@
       
 
       
-        <h2 id="List概述"><a href="#List概述" class="headerlink" title="List概述"></a>List概述</h2><p><img src="/img/collection/List.PNG" alt="" title="javaList集合"></p>
+        <h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
+<p>　　Vector是矢量队列，它是JDK1.0版本添加的类。继承于AbstractList，实现了List, RandomAccess, Cloneable这些接口。</p>
 <ul>
-<li>List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector</li>
+<li>Vector 继承了AbstractList，实现了List；所以，它是一个队列，支持相关的添加、删除、修改、遍历等功能。</li>
+<li>Vector 实现了RandmoAccess接口，即提供了随机访问功能。RandmoAccess是java中用来被List实现，为List提供快速访问功能的。在Vector中，我们即可以通过元素的序号快速获取元素对象；这就是快速随机访问。</li>
+<li>Vector 实现了Cloneable接口，即实现clone()函数。它能被克隆。  </li>
+</ul>
+<p>　　和ArrayList不同，Vector中的操作是线程安全的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure></p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">synchronized boolean        add(E object)</span><br><span class="line">             void           add(int location, E object)</span><br><span class="line">synchronized boolean        addAll(Collection&lt;? extends E&gt; collection)</span><br><span class="line">synchronized boolean        addAll(int location, Collection&lt;? extends E&gt; collection)</span><br><span class="line">synchronized void           addElement(E object)</span><br><span class="line">synchronized int            capacity()</span><br><span class="line">             void           clear()</span><br><span class="line">synchronized Object         clone()</span><br><span class="line">             boolean        contains(Object object)</span><br><span class="line">synchronized boolean        containsAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized void           copyInto(Object[] elements)</span><br><span class="line">synchronized E              elementAt(int location)</span><br><span class="line">             Enumeration&lt;E&gt; elements()</span><br><span class="line">synchronized void           ensureCapacity(int minimumCapacity)</span><br><span class="line">synchronized boolean        equals(Object object)</span><br><span class="line">synchronized E              firstElement()</span><br><span class="line">             E              get(int location)</span><br><span class="line">synchronized int            hashCode()</span><br><span class="line">synchronized int            indexOf(Object object, int location)</span><br><span class="line">             int            indexOf(Object object)</span><br><span class="line">synchronized void           insertElementAt(E object, int location)</span><br><span class="line">synchronized boolean        isEmpty()</span><br><span class="line">synchronized E              lastElement()</span><br><span class="line">synchronized int            lastIndexOf(Object object, int location)</span><br><span class="line">synchronized int            lastIndexOf(Object object)</span><br><span class="line">synchronized E              remove(int location)</span><br><span class="line">             boolean        remove(Object object)</span><br><span class="line">synchronized boolean        removeAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized void           removeAllElements()</span><br><span class="line">synchronized boolean        removeElement(Object object)</span><br><span class="line">synchronized void           removeElementAt(int location)</span><br><span class="line">synchronized boolean        retainAll(Collection&lt;?&gt; collection)</span><br><span class="line">synchronized E              set(int location, E object)</span><br><span class="line">synchronized void           setElementAt(E object, int location)</span><br><span class="line">synchronized void           setSize(int length)</span><br><span class="line">synchronized int            size()</span><br><span class="line">synchronized List&lt;E&gt;        subList(int start, int end)</span><br><span class="line">synchronized &lt;T&gt; T[]        toArray(T[] contents)</span><br><span class="line">synchronized Object[]       toArray()</span><br><span class="line">synchronized String         toString()</span><br><span class="line">synchronized void           trimToSize()</span><br></pre></td></tr></table></figure>
+<h3 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h3><ul>
+<li><p>通过迭代器遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> for(Iterator iter = list.iterator(); iter.hasNext(); ) &#123;</span><br><span class="line">    iter.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>随机访问，通过索引值去遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">int size = vec.size();</span><br><span class="line">for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">    value = (Integer)vec.get(i);        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>foreach循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">for (Integer integ:vec) &#123;</span><br><span class="line">    value = integ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enumeration遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer value = null;</span><br><span class="line">Enumeration enu = vec.elements();</span><br><span class="line">while (enu.hasMoreElements()) &#123;</span><br><span class="line">    value = (Integer)enu.nextElement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>elementData 是”Object[]类型的数组”，它保存了添加到Vector中的元素。elementData是个动态数组，如果初始化Vector时，没指定动态数组的大小，则使用默认大小10。随着Vector中元素的增加，Vector的容量也会动态增长，capacityIncrement是与容量增长相关的增长系数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?capacityIncrement : oldCapacity)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>elementCount 是动态数组的实际大小。</p>
+</li>
+<li><p>capacityIncrement 是动态数组的增长系数。</p>
+</li>
 </ul>
 
       
@@ -458,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/24/Java/collection/list之LinkedList/" rel="next" title="list之LinkedList">
-                <i class="fa fa-chevron-left"></i> list之LinkedList
+              <a href="/2018/06/24/Java/collection/list/" rel="next" title="list">
+                <i class="fa fa-chevron-left"></i> list
               </a>
             
           </div>
@@ -467,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/02/Java/collection/list之Vector/" rel="prev" title="list之Vector">
-                list之Vector <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -651,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#List概述"><span class="nav-number">1.</span> <span class="nav-text">List概述</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector"><span class="nav-number">1.</span> <span class="nav-text">Vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.1.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历方式"><span class="nav-number">1.2.</span> <span class="nav-text">遍历方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

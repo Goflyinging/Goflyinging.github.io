@@ -108,27 +108,27 @@
 
 
 
-  <meta name="description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
-<meta name="keywords" content="collection,list">
+  <meta name="description" content="内存模型  栈区 线程私有，使用一段连续的内存空间 存放局部变量表、操作栈、动态链接、方法出口 -Xss256K StackOverflowError OutOfMemoryError   堆 线程共享，生命周期与虚拟机相同 保存对象实 -Xms -Xmx -Xmn OutOfMemoryError   程序计数器 线程私有、占用内存小 字节码行号   方法区 线程共享 存储类加载信息、常量、静态">
+<meta name="keywords" content="jvm,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="list">
-<meta property="og:url" content="http://yoursite.com/2018/06/24/Java/collection/list/index.html">
+<meta property="og:title" content="jav运行时数据区">
+<meta property="og:url" content="http://yoursite.com/2018/03/01/Java/JVM/内存模型/index.html">
 <meta property="og:site_name" content="Superlxing&#39;s Notes">
-<meta property="og:description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
+<meta property="og:description" content="内存模型  栈区 线程私有，使用一段连续的内存空间 存放局部变量表、操作栈、动态链接、方法出口 -Xss256K StackOverflowError OutOfMemoryError   堆 线程共享，生命周期与虚拟机相同 保存对象实 -Xms -Xmx -Xmn OutOfMemoryError   程序计数器 线程私有、占用内存小 字节码行号   方法区 线程共享 存储类加载信息、常量、静态">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/collection/List.PNG">
-<meta property="og:updated_time" content="2018-06-24T16:20:44.415Z">
+<meta property="og:image" content="http://yoursite.com/img/jvm/20150720152805765.png">
+<meta property="og:updated_time" content="2018-07-08T12:49:15.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="list">
-<meta name="twitter:description" content="List概述  List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector">
-<meta name="twitter:image" content="http://yoursite.com/img/collection/List.PNG">
+<meta name="twitter:title" content="jav运行时数据区">
+<meta name="twitter:description" content="内存模型  栈区 线程私有，使用一段连续的内存空间 存放局部变量表、操作栈、动态链接、方法出口 -Xss256K StackOverflowError OutOfMemoryError   堆 线程共享，生命周期与虚拟机相同 保存对象实 -Xms -Xmx -Xmn OutOfMemoryError   程序计数器 线程私有、占用内存小 字节码行号   方法区 线程共享 存储类加载信息、常量、静态">
+<meta name="twitter:image" content="http://yoursite.com/img/jvm/20150720152805765.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/24/Java/collection/list/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/01/Java/JVM/内存模型/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>list | Superlxing's Notes</title>
+  <title>jav运行时数据区 | Superlxing's Notes</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/Java/collection/list/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/Java/JVM/内存模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="superlxing">
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">list
+          <h1 class="post-title" itemprop="name headline">jav运行时数据区
               
             
           </h1>
@@ -351,7 +351,7 @@
 	      
                 <span class="post-meta-item-text">Created at</span>
               
-              <time title="Post created: 2018-06-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">2018-06-24</time>
+              <time title="Post created: 2018-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-01T00:00:00+08:00">2018-03-01</time>
             
 
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-25 00:20:44" itemprop="dateModified" datetime="2018-06-25T00:20:44+08:00">2018-06-25</time>
+                <time title="Updated at: 2018-07-08 20:49:15" itemprop="dateModified" datetime="2018-07-08T20:49:15+08:00">2018-07-08</time>
               
             
           </span>
@@ -385,7 +385,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/collection/" itemprop="url" rel="index"><span itemprop="name">collection</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
 
                 
                 
@@ -419,9 +419,34 @@
       
 
       
-        <h2 id="List概述"><a href="#List概述" class="headerlink" title="List概述"></a>List概述</h2><p><img src="/img/collection/List.PNG" alt="" title="javaList集合"></p>
+        <h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p><img src="/img/jvm/20150720152805765.png" alt="" title="java内存模型"></p>
 <ul>
-<li>List是Collection的子类，其实现类主要包括ArrayList、LinkedList、Vector</li>
+<li>栈区<ul>
+<li>线程私有，使用一段连续的内存空间</li>
+<li>存放局部变量表、操作栈、动态链接、方法出口</li>
+<li>-Xss256K</li>
+<li>StackOverflowError OutOfMemoryError</li>
+</ul>
+</li>
+<li>堆<ul>
+<li>线程共享，生命周期与虚拟机相同</li>
+<li>保存对象实</li>
+<li>-Xms -Xmx -Xmn</li>
+<li>OutOfMemoryError</li>
+</ul>
+</li>
+<li>程序计数器<ul>
+<li>线程私有、占用内存小</li>
+<li>字节码行号</li>
+</ul>
+</li>
+<li>方法区<ul>
+<li>线程共享</li>
+<li>存储类加载信息、常量、静态变量等</li>
+<li>-XX:MetaspaceSize　-XX:MaxMetaspaceSize</li>
+<li>OutOfMemoryError</li>
+</ul>
+</li>
 </ul>
 
       
@@ -443,9 +468,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/collection/" rel="tag"># collection</a>
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
           
-            <a href="/tags/list/" rel="tag"># list</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -458,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/24/Java/collection/list之LinkedList/" rel="next" title="list之LinkedList">
-                <i class="fa fa-chevron-left"></i> list之LinkedList
+              <a href="/2018/03/01/Java/JVM/对象存活算法/" rel="next" title="判断对象存活算法">
+                <i class="fa fa-chevron-left"></i> 判断对象存活算法
               </a>
             
           </div>
@@ -468,8 +493,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/02/Java/collection/list之Vector/" rel="prev" title="list之Vector">
-                list之Vector <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/03/Java/JVM/垃圾收集算法/" rel="prev" title="垃圾收集算法">
+                垃圾收集算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -651,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#List概述"><span class="nav-number">1.</span> <span class="nav-text">List概述</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存模型"><span class="nav-number">1.</span> <span class="nav-text">内存模型</span></a></li></ol></div>
             
 
           </div>

@@ -305,6 +305,218 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/Java/JVM/对象存活算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="superlxing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Superlxing's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/01/Java/JVM/对象存活算法/" itemprop="url">
+                  判断对象存活算法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                
+              
+	      
+                <span class="post-meta-item-text">Created at</span>
+              
+              <time title="Post created: 2018-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-01T00:00:00+08:00">2018-03-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="判断对象存活算法"><a href="#判断对象存活算法" class="headerlink" title="判断对象存活算法"></a>判断对象存活算法</h1><h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><blockquote>
+<p>给对象添加一个引用计数器，每当一个地方引用它时，引用计数器加1；引用失效时计数器减1；计数器为0表示对象不在被使用。</p>
+</blockquote>
+<p><img src="/img/jvm/b9e5ecd5d1cfb1d045541c1f6e25e92c_hd.jpg" alt="" title="引用计数法"></p>
+<ul>
+<li>缺点<ul>
+<li>很难解决对象之间相互引用的方式</li>
+</ul>
+</li>
+</ul>
+<h2 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h2><blockquote>
+<p>从GC Roots对象作为起始点，利用数学中图论知识，图中可达对象便是存活对象，而不可达对象则是需要回收的垃圾内存。</p>
+</blockquote>
+<p><img src="/img/jvm/22f72b18415405c3e0207925a8de74fa_hd.jpg" alt="" title="可达性分析算法"></p>
+<ul>
+<li>GC ROOTS 对象<ul>
+<li>虚拟机栈（栈帧的局部变量表）中所引用的对象；</li>
+<li>本地方法栈的JNI所引用的对象；</li>
+<li>方法区的类静态属性（static）和常量（static final）所引用的对象；</li>
+</ul>
+</li>
+</ul>
+<h1 id="生存？死亡"><a href="#生存？死亡" class="headerlink" title="生存？死亡"></a>生存？死亡</h1><blockquote>
+<p>至少经过俩次可达性算法标记</p>
+</blockquote>
+<ul>
+<li>第一次标记  根据是否有必要执行finalize()方法 在对象存活期只会调用一次<ul>
+<li>没有必要执行：未覆盖finalize()方法或者已经调用</li>
+<li>有必要执行：将对象放入F-Quere队列中，虚拟机触发低优先级的finalize线程去执行，可由该方法再次拯救自己</li>
+</ul>
+</li>
+<li>第二次标记  F-Quere队列中对象进行第二次标记，若自救成功，在“即将回收”的集合中移除该对象</li>
+</ul>
+<h1 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h1><blockquote>
+<p>废弃常量和无用类</p>
+</blockquote>
+<ul>
+<li>常量  没有其它地方引用这个字面量</li>
+<li>类<ul>
+<li>该类所有的实例都已经被回收，即Java堆中不存在该类的任何实例；</li>
+<li>加载该类的ClassLoader已经被回收；</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/27/设计模式/策略模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -546,7 +758,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2018-06-24 19:05:30" itemprop="dateModified" datetime="2018-06-24T19:05:30+08:00">2018-06-24</time>
+                <time title="Updated at: 2018-07-03 00:33:06" itemprop="dateModified" datetime="2018-07-03T00:33:06+08:00">2018-07-03</time>
               
             
           </span>
@@ -1321,7 +1533,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1346,9 +1558,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1385,9 +1595,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
